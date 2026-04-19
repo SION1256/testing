@@ -267,6 +267,30 @@ body::before{content:'';position:fixed;inset:0;z-index:900;background:repeating-
 .quiz-fb.ok{color:var(--green);border:1px solid rgba(57,255,20,0.3);background:rgba(57,255,20,0.06);}
 .quiz-fb.bad{color:var(--pink);border:1px solid rgba(255,60,172,0.3);background:rgba(255,60,172,0.06);}
 
+/* CALCULATORS */
+.calc-tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px;}
+.calc-tab{font-family:var(--font-head);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:10px 18px;border-radius:var(--radius);border:1px solid var(--border);color:var(--muted);background:var(--panel);transition:var(--tr);cursor:pointer;}
+.calc-tab:hover{color:var(--text);border-color:rgba(0,240,255,0.3);}
+.calc-tab.active{color:var(--cyan);border-color:rgba(0,240,255,0.5);background:rgba(0,240,255,0.08);text-shadow:0 0 8px var(--cyan);}
+.calc-area{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:24px;min-height:420px;}
+.calc-panel{display:none;animation:fadeUp 0.3s ease;}
+.calc-panel.active{display:block;}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;}
+.calc-input-group h3{font-family:var(--font-head);font-size:11px;letter-spacing:0.15em;color:var(--cyan);margin-bottom:16px;text-transform:uppercase;}
+.calc-input-group.wide{grid-column:1 / -1;}
+.input-row{display:grid;grid-template-columns:140px 1fr;gap:12px;align-items:center;margin-bottom:12px;}
+.input-row label{font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:0.1em;}
+.input-row input,.input-row select{width:100%;padding:10px 12px;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--font-mono);font-size:12px;transition:var(--tr);}
+.input-row input:focus,.input-row select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 12px rgba(0,240,255,0.15);}
+.calc-results{display:flex;flex-direction:column;align-items:center;gap:16px;padding-top:16px;border-top:1px solid var(--border);}
+.result-box{text-align:center;padding:20px;background:rgba(0,0,0,0.3);border-radius:10px;min-width:280px;}
+.result-label{font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;}
+.result-value{font-family:var(--font-head);font-size:32px;font-weight:900;color:var(--gold);text-shadow:0 0 20px var(--gold);margin-bottom:12px;}
+.result-breakdown{font-family:var(--font-mono);font-size:11px;color:var(--muted);line-height:1.8;text-align:left;}
+.relic-info,.speed-info,.break-info{background:rgba(0,0,0,0.3);border-left:3px solid var(--purple);padding:16px;border-radius:0 8px 8px 0;margin-bottom:24px;}
+.relic-info p,.speed-info p,.break-info p{font-family:var(--font-mono);font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:8px;}
+.relic-info p:last-child,.speed-info p:last-child,.break-info p:last-child{margin-bottom:0;}
+
 /* FOOTER */
 #footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:20px clamp(16px,5vw,80px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;background:rgba(4,5,13,0.6);}
 .footer-left{font-family:var(--font-mono);font-size:11px;color:var(--muted);line-height:1.7;}
@@ -288,6 +312,8 @@ body::before{content:'';position:fixed;inset:0;z-index:900;background:repeating-
   .team-members{grid-template-columns:repeat(2,1fr);}
   .quiz-opts{grid-template-columns:1fr;}
   #footer{flex-direction:column;align-items:flex-start;}.footer-right{text-align:left;}
+  .calc-grid{grid-template-columns:1fr;}
+  .input-row{grid-template-columns:120px 1fr;}
 }
 @media(max-width:480px){
   .eidolons-grid,.skills-grid{grid-template-columns:1fr;}
@@ -399,6 +425,7 @@ body::before{content:'';position:fixed;inset:0;z-index:900;background:repeating-
     <li><a href="#" data-page="build">Build</a></li>
     <li><a href="#" data-page="teams">Teams</a></li>
     <li><a href="#" data-page="eidolons">Eidolons</a></li>
+    <li><a href="#" data-page="calculators">🧮 Calculators</a></li>
     <li><a href="#" data-page="arcade" class="nav-arcade">🕹 Arcade</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -413,6 +440,7 @@ body::before{content:'';position:fixed;inset:0;z-index:900;background:repeating-
   <a href="#" data-page="build">Build</a>
   <a href="#" data-page="teams">Teams</a>
   <a href="#" data-page="eidolons">Eidolons</a>
+  <a href="#" data-page="calculators">🧮 Calculators</a>
   <a href="#" data-page="arcade" class="nav-arcade">🕹 Arcade</a>
 </div>
 
@@ -902,6 +930,202 @@ body::before{content:'';position:fixed;inset:0;z-index:900;background:repeating-
   </div>
 </main>
 
+<!-- CALCULATORS -->
+<main class="page" id="page-calculators">
+  <div class="section-head">
+    <h1><span>CALCULATORS</span> & BUILD TOOLS</h1>
+    <div class="sub">Optimize Silver Wolf LV.999's performance</div>
+    <div class="section-divider"></div>
+  </div>
+  
+  <div class="calc-tabs">
+    <button class="calc-tab active" data-calc="damage">⚔ Damage Calculator</button>
+    <button class="calc-tab" data-calc="relics">💎 Relic Scorer</button>
+    <button class="calc-tab" data-calc="speed">⚡ Speed Tuning</button>
+    <button class="calc-tab" data-calc="break">💥 Break Effect</button>
+  </div>
+  
+  <div class="calc-area">
+    
+    <!-- DAMAGE CALCULATOR -->
+    <div class="calc-panel active" id="calc-damage">
+      <div class="calc-grid">
+        <div class="calc-input-group">
+          <h3>Character Stats</h3>
+          <div class="input-row">
+            <label>ATK</label>
+            <input type="number" id="dmg-atk" value="3500" min="0"/>
+          </div>
+          <div class="input-row">
+            <label>CRIT Rate %</label>
+            <input type="number" id="dmg-crit-rate" value="70" min="0" max="100"/>
+          </div>
+          <div class="input-row">
+            <label>CRIT DMG %</label>
+            <input type="number" id="dmg-crit-dmg" value="180" min="0"/>
+          </div>
+          <div class="input-row">
+            <label>DMG Bonus %</label>
+            <input type="number" id="dmg-bonus" value="46.6" min="0"/>
+          </div>
+          <div class="input-row">
+            <label>DEF Ignore %</label>
+            <input type="number" id="dmg-def-ign" value="36" min="0"/>
+          </div>
+          <div class="input-row">
+            <label>Skill Multiplier %</label>
+            <input type="number" id="dmg-mult" value="180" min="0"/>
+          </div>
+        </div>
+        
+        <div class="calc-input-group">
+          <h3>Enemy Stats</h3>
+          <div class="input-row">
+            <label>Enemy Level</label>
+            <input type="number" id="dmg-enemy-lvl" value="95" min="1" max="150"/>
+          </div>
+          <div class="input-row">
+            <label>Enemy DEF</label>
+            <input type="number" id="dmg-enemy-def" value="1200" min="0"/>
+          </div>
+          <div class="input-row">
+            <label>RES %</label>
+            <input type="number" id="dmg-enemy-res" value="10" min="0" max="100"/>
+          </div>
+          <div class="input-row">
+            <label>Vulnerability %</label>
+            <input type="number" id="dmg-vuln" value="0" min="0"/>
+          </div>
+        </div>
+      </div>
+      
+      <div class="calc-results">
+        <button class="gbtn cyan" onclick="calcDamage()">Calculate Damage</button>
+        <div class="result-box">
+          <div class="result-label">Expected Damage</div>
+          <div class="result-value" id="dmg-result">0</div>
+          <div class="result-breakdown" id="dmg-breakdown"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- RELIC SCORER -->
+    <div class="calc-panel" id="calc-relics">
+      <div class="relic-info">
+        <p>Score your relics based on optimal stat weights for Silver Wolf LV.999.</p>
+        <p><strong>Stat Weights:</strong> CRIT Rate: 1.0 | CRIT DMG: 0.5 | ATK%: 0.7 | SPD: 1.2 | Effect Hit Rate: 0.3</p>
+      </div>
+      
+      <div class="calc-input-group wide">
+        <div class="input-row">
+          <label>CRIT Rate</label>
+          <input type="number" id="rel-crit-rate" value="0" min="0"/>
+        </div>
+        <div class="input-row">
+          <label>CRIT DMG</label>
+          <input type="number" id="rel-crit-dmg" value="0" min="0"/>
+        </div>
+        <div class="input-row">
+          <label>ATK %</label>
+          <input type="number" id="rel-atk-pct" value="0" min="0"/>
+        </div>
+        <div class="input-row">
+          <label>SPD</label>
+          <input type="number" id="rel-spd" value="0" min="0"/>
+        </div>
+        <div class="input-row">
+          <label>Effect Hit Rate %</label>
+          <input type="number" id="rel-ehr" value="0" min="0"/>
+        </div>
+      </div>
+      
+      <div class="calc-results">
+        <button class="gbtn cyan" onclick="calcRelicScore()">Score Relic</button>
+        <div class="result-box">
+          <div class="result-label">Relic Score</div>
+          <div class="result-value" id="relic-result">0</div>
+          <div class="result-breakdown" id="relic-breakdown"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- SPEED TUNING -->
+    <div class="calc-panel" id="calc-speed">
+      <div class="speed-info">
+        <p>Calculate optimal speed breakpoints for action forwarding and turn cycling.</p>
+        <p><strong>Key Breakpoints:</strong> 134, 142, 160, 178, 200+ SPD</p>
+      </div>
+      
+      <div class="calc-input-group wide">
+        <div class="input-row">
+          <label>Base SPD</label>
+          <input type="number" id="spd-base" value="100" min="0"/>
+        </div>
+        <div class="input-row">
+          <label>SPD Boots</label>
+          <input type="number" id="spd-boots" value="25" min="0"/>
+        </div>
+        <div class="input-row">
+          <label>SPD from Relics</label>
+          <input type="number" id="spd-relics" value="0" min="0"/>
+        </div>
+        <div class="input-row">
+          <label>SPD Buffs %</label>
+          <input type="number" id="spd-buffs" value="0" min="0"/>
+        </div>
+      </div>
+      
+      <div class="calc-results">
+        <button class="gbtn cyan" onclick="calcSpeed()">Calculate SPD</button>
+        <div class="result-box">
+          <div class="result-label">Total SPD</div>
+          <div class="result-value" id="spd-result">0</div>
+          <div class="result-breakdown" id="spd-breakdown"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- BREAK EFFECT -->
+    <div class="calc-panel" id="calc-break">
+      <div class="break-info">
+        <p>Calculate break damage and delay based on your break effect investment.</p>
+      </div>
+      
+      <div class="calc-input-group wide">
+        <div class="input-row">
+          <label>Break Effect %</label>
+          <input type="number" id="brk-effect" value="0" min="0"/>
+        </div>
+        <div class="input-row">
+          <label>Enemy Toughness</label>
+          <input type="number" id="brk-toughness" value="120" min="0"/>
+        </div>
+        <div class="input-row">
+          <label>Enemy Level</label>
+          <input type="number" id="brk-enemy-lvl" value="95" min="1" max="150"/>
+        </div>
+        <div class="input-row">
+          <label>Super Break? (E6)</label>
+          <select id="brk-super">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="calc-results">
+        <button class="gbtn cyan" onclick="calcBreak()">Calculate Break</button>
+        <div class="result-box">
+          <div class="result-label">Break Damage</div>
+          <div class="result-value" id="brk-result">0</div>
+          <div class="result-breakdown" id="brk-breakdown"></div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</main>
+
 <!-- FOOTER -->
 <footer id="footer">
   <div class="footer-left">Fan Site · Silver Wolf LV.999 · Honkai: Star Rail Version 4.2<br/>Made by <a href="https://github.com/SION1256" target="_blank" rel="noopener">SION1256</a> · Not affiliated with HoYoverse</div>
@@ -1255,6 +1479,167 @@ function answerQ(chosen,correct,btn){
       fb.style.display='none';
     } else { renderQ(); }
   },1200);
+}
+
+/* ════════════════════════════════
+   CALCULATORS
+════════════════════════════════ */
+
+// Calculator Tab Switching
+document.querySelectorAll('.calc-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const calcId = tab.getAttribute('data-calc');
+    document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('calc-' + calcId).classList.add('active');
+  });
+});
+
+// Damage Calculator
+function calcDamage() {
+  const atk = parseFloat(document.getElementById('dmg-atk').value) || 0;
+  const critRate = Math.min(100, parseFloat(document.getElementById('dmg-crit-rate').value) || 0) / 100;
+  const critDmg = (parseFloat(document.getElementById('dmg-crit-dmg').value) || 0) / 100;
+  const dmgBonus = (parseFloat(document.getElementById('dmg-bonus').value) || 0) / 100;
+  const defIgn = Math.min(100, parseFloat(document.getElementById('dmg-def-ign').value) || 0) / 100;
+  const mult = (parseFloat(document.getElementById('dmg-mult').value) || 0) / 100;
+  
+  const enemyLvl = parseFloat(document.getElementById('dmg-enemy-lvl').value) || 95;
+  const enemyDef = parseFloat(document.getElementById('dmg-enemy-def').value) || 0;
+  const enemyRes = Math.min(100, parseFloat(document.getElementById('dmg-enemy-res').value) || 0) / 100;
+  const vuln = (parseFloat(document.getElementById('dmg-vuln').value) || 0) / 100;
+  
+  // HSR DEF formula: DEF Mult = (ATK Lvl + 20) / ((DEF * (1 - DEF Ign)) + (ATK Lvl + 20))
+  const defMult = (enemyLvl + 20) / ((enemyDef * (1 - defIgn)) + (enemyLvl + 20));
+  
+  // RES Multiplier
+  let resMult = 1 - enemyRes;
+  if (enemyRes < 0) resMult = 1 - enemyRes; // Negative RES
+  if (enemyRes >= 0.75) resMult = 1 / (1 + enemyRes); // RES > 75%
+  
+  // Vulnerability multiplier
+  const vulnMult = 1 + vuln;
+  
+  // Crit multiplier
+  const critMult = 1 + (critRate * critDmg);
+  
+  // DMG Bonus multiplier
+  const dmgMult = 1 + dmgBonus;
+  
+  // Final damage
+  const baseDmg = atk * mult;
+  const finalDmg = baseDmg * defMult * resMult * vulnMult * critMult * dmgMult;
+  
+  const result = Math.round(finalDmg).toLocaleString();
+  document.getElementById('dmg-result').textContent = result;
+  
+  const breakdown = `
+    <div>Base: ${Math.round(baseDmg).toLocaleString()}</div>
+    <div>DEF Mult: ${(defMult * 100).toFixed(1)}%</div>
+    <div>RES Mult: ${(resMult * 100).toFixed(1)}%</div>
+    <div>Crit Avg: ${(critMult * 100).toFixed(1)}%</div>
+    <div>DMG Bonus: ${(dmgMult * 100).toFixed(1)}%</div>
+    <div>Vulnerability: ${(vulnMult * 100).toFixed(1)}%</div>
+  `;
+  document.getElementById('dmg-breakdown').innerHTML = breakdown;
+}
+
+// Relic Scorer
+function calcRelicScore() {
+  const critRate = parseFloat(document.getElementById('rel-crit-rate').value) || 0;
+  const critDmg = parseFloat(document.getElementById('rel-crit-dmg').value) || 0;
+  const atkPct = parseFloat(document.getElementById('rel-atk-pct').value) || 0;
+  const spd = parseFloat(document.getElementById('rel-spd').value) || 0;
+  const ehr = parseFloat(document.getElementById('rel-ehr').value) || 0;
+  
+  // Stat weights
+  const score = (critRate * 1.0) + (critDmg * 0.5) + (atkPct * 0.7) + (spd * 1.2) + (ehr * 0.3);
+  
+  const result = score.toFixed(1);
+  document.getElementById('relic-result').textContent = result;
+  
+  let rating = 'Poor';
+  let color = 'var(--muted)';
+  if (score >= 40) { rating = 'Godly'; color = 'var(--gold)'; }
+  else if (score >= 30) { rating = 'Excellent'; color = 'var(--cyan)'; }
+  else if (score >= 20) { rating = 'Good'; color = 'var(--green)'; }
+  else if (score >= 10) { rating = 'Average'; color = 'var(--purple)'; }
+  
+  const breakdown = `
+    <div>CRIT Rate: ${critRate} × 1.0 = ${(critRate * 1.0).toFixed(1)}</div>
+    <div>CRIT DMG: ${critDmg} × 0.5 = ${(critDmg * 0.5).toFixed(1)}</div>
+    <div>ATK%: ${atkPct} × 0.7 = ${(atkPct * 0.7).toFixed(1)}</div>
+    <div>SPD: ${spd} × 1.2 = ${(spd * 1.2).toFixed(1)}</div>
+    <div>EHR: ${ehr} × 0.3 = ${(ehr * 0.3).toFixed(1)}</div>
+    <div style="margin-top:8px;color:${color};font-weight:bold;">Rating: ${rating}</div>
+  `;
+  document.getElementById('relic-breakdown').innerHTML = breakdown;
+}
+
+// Speed Tuning
+function calcSpeed() {
+  const baseSpd = parseFloat(document.getElementById('spd-base').value) || 100;
+  const bootsSpd = parseFloat(document.getElementById('spd-boots').value) || 0;
+  const relicSpd = parseFloat(document.getElementById('spd-relics').value) || 0;
+  const buffsPct = (parseFloat(document.getElementById('spd-buffs').value) || 0) / 100;
+  
+  const totalSpd = Math.floor((baseSpd + bootsSpd + relicSpd) * (1 + buffsPct));
+  
+  document.getElementById('spd-result').textContent = totalSpd;
+  
+  const breakpoints = [134, 142, 160, 178, 200];
+  let reachedBP = [];
+  let nextBP = null;
+  
+  breakpoints.forEach(bp => {
+    if (totalSpd >= bp) reachedBP.push(bp);
+    else if (nextBP === null) nextBP = bp;
+  });
+  
+  let breakdown = `<div>Total SPD: <strong>${totalSpd}</strong></div>`;
+  breakdown += `<div>Breakpoints reached: ${reachedBP.length > 0 ? reachedBP.join(', ') : 'None'}</div>`;
+  if (nextBP) {
+    breakdown += `<div>Next breakpoint: ${nextBP} (${nextBP - totalSpd} SPD needed)</div>`;
+  } else {
+    breakdown += `<div style="color:var(--gold)">All major breakpoints reached!</div>`;
+  }
+  
+  document.getElementById('spd-breakdown').innerHTML = breakdown;
+}
+
+// Break Effect Calculator
+function calcBreak() {
+  const breakEffect = (parseFloat(document.getElementById('brk-effect').value) || 0) / 100;
+  const toughness = parseFloat(document.getElementById('brk-toughness').value) || 120;
+  const enemyLvl = parseFloat(document.getElementById('brk-enemy-lvl').value) || 95;
+  const isSuper = document.getElementById('brk-super').value === '1';
+  
+  // Base break damage multiplier based on BE
+  const baseMult = 2 + (breakEffect * 2.5); // Simplified formula
+  
+  // Level scaling factor
+  const lvlFactor = (enemyLvl + 20) / 100;
+  
+  // Super Break bonus (E6)
+  const superBonus = isSuper ? 1.5 : 1.0;
+  
+  // Break damage
+  const breakDmg = Math.floor(baseMult * lvlFactor * toughness * superBonus * 10);
+  
+  // Break delay (actions delayed)
+  const breakDelay = 1 + Math.floor(breakEffect * 2); // Simplified
+  
+  document.getElementById('brk-result').textContent = breakDmg.toLocaleString();
+  
+  const breakdown = `
+    <div>BE Multiplier: ${(baseMult * 100).toFixed(0)}%</div>
+    <div>Level Factor: ${lvlFactor.toFixed(2)}</div>
+    <div>Toughness: ${toughness}</div>
+    <div>Super Break Bonus: ${isSuper ? '×1.5 (E6)' : '×1.0'}</div>
+    <div style="margin-top:8px;">Break Delay: ~${breakDelay} action(s)</div>
+  `;
+  document.getElementById('brk-breakdown').innerHTML = breakdown;
 }
 </script>
 </body>
